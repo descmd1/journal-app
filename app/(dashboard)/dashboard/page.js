@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('manuscripts')
   const [user, setUser] = useState(null)
@@ -170,7 +172,7 @@ export default function Dashboard() {
       
       try {
         // Verify the payment with our backend
-        const verifyResponse = await fetch('http://localhost:5000/api/payments/verify', {
+        const verifyResponse = await fetch(`${base_url}/api/payments/verify`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -208,7 +210,7 @@ export default function Dashboard() {
 
   const loadManuscripts = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/manuscripts', {
+      const response = await fetch(`${base_url}/api/manuscripts`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -252,7 +254,7 @@ export default function Dashboard() {
 
   const loadPayments = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/payments', {
+      const response = await fetch(`${base_url}/api/payments`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -297,7 +299,7 @@ export default function Dashboard() {
       console.log('🔍 DEBUG: Loading reviews for user...')
       console.log('🔍 DEBUG: Token being used:', token ? 'Token exists' : 'No token')
       
-      const response = await fetch(`http://localhost:5000/api/reviews/my-assignments?t=${Date.now()}`, {
+      const response = await fetch(`${base_url}/api/reviews/my-assignments?t=${Date.now()}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -422,7 +424,7 @@ export default function Dashboard() {
       console.log('Initiating Paystack payment via server...')
       
       // Call backend to initialize Paystack payment
-      const response = await fetch('http://localhost:5000/api/payments/initiate', {
+      const response = await fetch(`${base_url}/api/payments/initiate`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

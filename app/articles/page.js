@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function ArticlesPage() {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
@@ -31,7 +33,7 @@ export default function ArticlesPage() {
       if (selectedIssue) params.append('issue', selectedIssue)
       if (selectedYear) params.append('year', selectedYear)
 
-      const response = await fetch(`http://localhost:5000/api/editorial/published-articles?${params}`)
+      const response = await fetch(`${base_url}/api/editorial/published-articles?${params}`)
       const data = await response.json()
 
       if (data.success) {

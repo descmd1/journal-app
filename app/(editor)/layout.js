@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function EditorLayout({ children }) {
   const router = useRouter()
   const [isCheckingAuth, setIsCheckingAuth] = useState(true)
@@ -18,7 +20,7 @@ export default function EditorLayout({ children }) {
 
       try {
         // Check the actual user role from the backend
-        const response = await fetch('http://localhost:5000/api/auth/me', {
+        const response = await fetch(`${base_url}/api/auth/me`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },

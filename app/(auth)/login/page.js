@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -28,7 +30,7 @@ export default function Login() {
     setError('')
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${base_url}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

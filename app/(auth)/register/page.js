@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function Register() {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -106,7 +108,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(`${base_url}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

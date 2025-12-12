@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function Submit() {
   const [formData, setFormData] = useState({
     title: '',
@@ -168,7 +170,7 @@ export default function Submit() {
         formDataToSend.append('files', file)
       })
 
-      const response = await fetch('http://localhost:5000/api/manuscripts', {
+      const response = await fetch(`${base_url}/api/manuscripts`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

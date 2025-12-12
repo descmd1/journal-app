@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function ArticlePage() {
   const [article, setArticle] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -21,7 +23,7 @@ export default function ArticlePage() {
   const fetchArticle = async () => {
     try {
       setLoading(true)
-      const response = await fetch(`http://localhost:5000/api/editorial/article/${params.id}`)
+      const response = await fetch(`${base_url}/api/editorial/article/${params.id}`)
       const data = await response.json()
 
       if (data.success) {
@@ -98,20 +100,20 @@ export default function ArticlePage() {
     if (article?.filePath) {
       // Track download
       try {
-        await fetch(`http://localhost:5000/api/editorial/article/${params.id}/download`, {
+        await fetch(`${base_url}/api/editorial/article/${params.id}/download`, {
           method: 'POST'
         })
       } catch (error) {
         console.error('Error tracking download:', error)
       }
-      
-      window.open(`http://localhost:5000${article.filePath}`, '_blank')
+
+      window.open(`${base_url}${article.filePath}`, '_blank')
     }
   }
 
   const trackShare = async () => {
     try {
-      await fetch(`http://localhost:5000/api/editorial/article/${params.id}/share`, {
+      await fetch(`${base_url}/api/editorial/article/${params.id}/share`, {
         method: 'POST'
       })
     } catch (error) {

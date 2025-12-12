@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default function EditorDashboard() {
   const [activeTab, setActiveTab] = useState('manuscripts')
   const [user, setUser] = useState(null)
@@ -43,7 +45,7 @@ export default function EditorDashboard() {
       const token = localStorage.getItem('token')
       
       // Load user info
-      const userResponse = await fetch('http://localhost:5000/api/auth/me', {
+      const userResponse = await fetch(`${base_url}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -72,7 +74,7 @@ export default function EditorDashboard() {
       
       console.log('🔍 DEBUG: Loading manuscripts for editor:', { token: !!token, userRole })
       
-      const response = await fetch('http://localhost:5000/api/editorial/editor-manuscripts', {
+      const response = await fetch(`${base_url}/api/editorial/editor-manuscripts`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -97,7 +99,7 @@ export default function EditorDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch('http://localhost:5000/api/admin/users?role=reviewer', {
+      const response = await fetch(`${base_url}/api/admin/users?role=reviewer`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -119,7 +121,7 @@ export default function EditorDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/editorial/initial-review/${manuscriptId}`, {
+      const response = await fetch(`${base_url}/api/editorial/initial-review/${manuscriptId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -176,7 +178,7 @@ export default function EditorDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/editorial/submit-back/${manuscriptId}`, {
+      const response = await fetch(`${base_url}/api/editorial/submit-back/${manuscriptId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -211,7 +213,7 @@ export default function EditorDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/editorial/make-decision/${manuscriptId}`, {
+      const response = await fetch(`${base_url}/api/editorial/make-decision/${manuscriptId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -247,7 +249,7 @@ export default function EditorDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch('http://localhost:5000/api/reviews/assign', {
+      const response = await fetch(`${base_url}/api/reviews/assign`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

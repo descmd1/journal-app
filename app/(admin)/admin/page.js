@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 // ...existing code...
+const base_url = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -85,7 +86,7 @@ export default function AdminDashboard() {
 
   const loadStatistics = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/dashboard', {
+      const response = await fetch(`${base_url}/api/admin/dashboard`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -136,7 +137,7 @@ export default function AdminDashboard() {
         ...cleanFilters
       }).toString()
 
-      const response = await fetch(`http://localhost:5000/api/admin/users?${queryParams}`, {
+      const response = await fetch(`${base_url}/api/admin/users?${queryParams}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -171,7 +172,7 @@ export default function AdminDashboard() {
 
   const loadManuscripts = async (token) => {
     try {
-      const response = await fetch('http://localhost:5000/api/manuscripts/admin/all', {
+      const response = await fetch(`${base_url}/api/manuscripts/admin/all`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -207,7 +208,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/toggle-status`, {
+      const response = await fetch(`${base_url}/api/admin/users/${userId}/toggle-status`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -243,7 +244,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/admin/users/${userId}/role`, {
+      const response = await fetch(`${base_url}/api/admin/users/${userId}/role`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -308,7 +309,7 @@ export default function AdminDashboard() {
         ...cleanFilters
       }).toString()
 
-      const response = await fetch(`http://localhost:5000/api/manuscripts/admin/all?${queryParams}`, {
+      const response = await fetch(`${base_url}/api/manuscripts/admin/all?${queryParams}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -338,7 +339,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/manuscripts/${manuscriptId}/status`, {
+      const response = await fetch(`${base_url}/api/manuscripts/${manuscriptId}/status`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -375,7 +376,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch('http://localhost:5000/api/admin/users?role=reviewer', {
+      const response = await fetch(`${base_url}/api/admin/users?role=reviewer`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -401,7 +402,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch('http://localhost:5000/api/admin/users?role=editor', {
+      const response = await fetch(`${base_url}/api/admin/users?role=editor`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -432,8 +433,8 @@ export default function AdminDashboard() {
         reviewerIds,
         reviewerIdsArray: Array.isArray(reviewerIds) ? reviewerIds : [reviewerIds]
       })
-      
-      const response = await fetch('http://localhost:5000/api/reviews/assign', {
+
+      const response = await fetch(`${base_url}/api/reviews/assign`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -470,7 +471,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/editorial/assign-editor/${manuscriptId}`, {
+      const response = await fetch(`${base_url}/api/editorial/assign-editor/${manuscriptId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -530,7 +531,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/plagiarism/check/${manuscriptId}`, {
+      const response = await fetch(`${base_url}/api/plagiarism/check/${manuscriptId}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -558,7 +559,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch(`http://localhost:5000/api/plagiarism/report/${manuscriptId}`, {
+      const response = await fetch(`${base_url}/api/plagiarism/report/${manuscriptId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -589,7 +590,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem('token')
       
-      const response = await fetch('http://localhost:5000/api/editorial/debug-manuscripts', {
+      const response = await fetch(`${base_url}/api/editorial/debug-manuscripts`, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
