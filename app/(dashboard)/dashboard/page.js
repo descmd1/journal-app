@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+const base_url = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('manuscripts')

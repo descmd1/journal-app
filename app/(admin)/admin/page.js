@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 // ...existing code...
-const base_url = process.env.NEXT_PUBLIC_BASE_URL;
+const base_url = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('dashboard')
